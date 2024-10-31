@@ -7,7 +7,7 @@
 
  Para testar os arquvios no seu computador, deve se ter instalado o node. Após isso, basta realizar um git clone ou baixar os arquivos e coloca-los no seu diretório local e executar o seguinte comando no terminal ``` npm install ``` para instalar os pacotes necessários para rodar os códigos.
 
- Para rodar um determinado código, utilize o comando ``` node ./QuestaoX/questaoX.js ``` substitua o 'X' pelo numero da questão que deseja analisar.
+ Para rodar um determinado código, utilize o comando ``` node ./QuestaoX/questaoX.js ``` substituindo o 'X' pelo numero da questão que deseja analisar.
 
 ## Questões
 ### 1. Programa questao1.js: Crie a classe Vertice e implemente nessa classe:
