@@ -1,13 +1,13 @@
 # Desafio1.1 FormacaoBack-End Node.js/Express
 ### Desafio 1.1 - Fundamentos do Javascript
 
-#### Este desafio foi proposto pela iUUL para os alunos da Residência em Node.js/Express como forma de nivelamento de conhecimentos sobre Javascript.
+ Este desafio foi proposto pela iUUL para os alunos da Residência em Node.js/Express como forma de nivelamento de conhecimentos sobre Javascript.
 
-#### Cada desafio esta localizado em sua determinada pasta, as classes foram feitas em arquivos separados para facilitar a exportação e serem utilizadas para resolver as outras questões.
+ Cada desafio esta localizado em sua determinada pasta, as classes foram feitas em arquivos separados para facilitar a exportação e serem utilizadas para resolver as outras questões.
 
-#### Para testar os arquvios no seu computador, deve se ter instalado o node. Após isso, basta realizar um git clone ou baixar os arquivos e coloca-los no seu diretório local e executar o seguinte comando no terminal ``` npm install ``` para instalar os pacotes necessários para rodar os códigos.
+ Para testar os arquvios no seu computador, deve se ter instalado o node. Após isso, basta realizar um git clone ou baixar os arquivos e coloca-los no seu diretório local e executar o seguinte comando no terminal ``` npm install ``` para instalar os pacotes necessários para rodar os códigos.
 
-#### Para rodar o um determinado código, utilize o comando ``` node ./QuestaoX/questaoX.js ``` substitua o 'X' pelo numero da questão que deseja analisar.
+ Para rodar o um determinado código, utilize o comando ``` node ./QuestaoX/questaoX.js ``` substitua o 'X' pelo numero da questão que deseja analisar.
 
 ## Questões
 ### 1. Programa questao1.js: Crie a classe Vertice e implemente nessa classe:
