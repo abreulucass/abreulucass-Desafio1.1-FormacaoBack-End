@@ -1,6 +1,6 @@
 export class Vertice{
 
-    // Atributos da classe
+    // Atributos privados da classe
     #x;
     #y;
 
@@ -19,17 +19,17 @@ export class Vertice{
 
     // Métodos
     geterDistance(v2){  
-        const result = Math.sqrt( ( ( v2.#x - this.#x ) ** 2) + (( v2.#y - this.#y ) ** 2));
+        const result = Math.sqrt( ( ( v2.#x - this.#x ) ** 2) + (( v2.#y - this.#y ) ** 2)); // calculo da distancia euclidiana
         return Math.round(result * 100) / 100; //arredondar para duas casas decimais
     }
     
     equals(v2){
-        return this.#x === v2.#x && this.#y === v2.#y
+        return this.#x === v2.#x && this.#y === v2.#y;
     }
     
     move(newX, newY){
-        this.setX(newX)
-        this.setY(newY)
+        this.setX(newX);
+        this.setY(newY);
     }
 
     mostraCoord(){

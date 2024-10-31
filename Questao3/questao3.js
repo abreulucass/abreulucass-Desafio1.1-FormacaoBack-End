@@ -10,8 +10,8 @@ Em seguida, leia valores do usuário para criar um polígono e chamar os método
 na classe. */
 
 import promptSync from 'prompt-sync';
-import { Vertice } from '../Questao1/Vertice.js'
-import { Poligono } from './Poligono.js'
+import { Vertice } from '../Questao1/Vertice.js';
+import { Poligono } from './Poligono.js';
 
 const prompt = promptSync();
 
@@ -44,11 +44,11 @@ function lerDados(){
       continue;
     } // verifica se o vertice não é duplicado
 
-    vertices.push( new Vertice(x, y)) // insere o vertice no array
+    vertices.push( new Vertice(x, y)); // insere o vertice no array
     cont_vert ++; // incrementa o contador de vertices
 
     if(cont_vert < 3)
-      console.log("É necessário pelo menos 3 vértices")
+      console.log("É necessário pelo menos 3 vértices");
     else{
 
       let resp = prompt("Deseja adicionar mais um vértice? (S/N)");
@@ -59,23 +59,23 @@ function lerDados(){
     
   }
 
-  return vertices
+  return vertices;
 }
 
 // Cria o objeto poligono
-const poligono1 = new Poligono(lerDados())
+const poligono1 = new Poligono(lerDados());
 
-console.log('\n')
+console.log('\n');
 
 // mostra os vertices do poligono
-console.log("Mostrando poligono 1:")
-poligono1.mostrarVertPoli()
+console.log("Mostrando poligono 1:");
+poligono1.mostrarVertPoli();
 
 // metodo add vertice
 if(poligono1.addVertice()){
   console.log("\nVertice adicionado ao poligono 1\n");
 
-  console.log("Mostrando poligono 1 após a adição:")
+  console.log("Mostrando poligono 1 após a adição:");
   poligono1.mostrarVertPoli();
 }
 
@@ -83,6 +83,6 @@ if(poligono1.addVertice()){
 console.log("\nPoligono 1:\n " + poligono1.getterQTDVertices());
 
 //metodo getter perimetro
-console.log("\nPerimetro do poligono 1 = " + poligono1.getterPerimetro())
+console.log("\nPerimetro do poligono 1 = " + poligono1.getterPerimetro());
 
 

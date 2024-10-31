@@ -18,12 +18,12 @@ máscara 999.999.999-99, renda com 2 casas decimais e data com a máscara dd/mm/
 import PromptSync from "prompt-sync";
 const prompt = PromptSync();
 
-const regexNum = /\d+/;
-const regexSim = /[^\w\s]/;
-const regexLetras = /[a-zA-Z]/;
-const regexData = /^\d{2}\/\d{2}\/\d{4}$/;
-const regexRenda = /^\d+,\d{2}$/
-
+const regexNum = /\d+/; // expressao regular para identificar digitos
+const regexSim = /[^\w\s]/; // expressao regular para identificar simbolos
+const regexLetras = /[a-zA-Z]/; // expressao regular para identificar letras
+const regexData = /^\d{2}\/\d{2}\/\d{4}$/; // expressao regular para identificar formataçao de datas '__/__/__'
+const regexRenda = /^\d+,\d{2}$/; // expressao regular para identificar padrao de duas casas decimias com ',' ex: 2,0
+ 
 function lerNome(){
     while(1){
         var nome = prompt("Digite o nome do Cliente: (Pelo menos 5 caracteres) - ");
@@ -55,7 +55,7 @@ function lerCPF(){
         }
 
         if(CPF.length < 11 || CPF.length > 11){
-            console.log("ERRO: O CPF tem que ter exatamente 11 digitos")
+            console.log("ERRO: O CPF tem que ter exatamente 11 digitos");
             continue;
         }
 
@@ -77,17 +77,17 @@ function lerDataNasc(){
             break;
         }
 
-        const [dia, mes, ano] = data.split('/').map(Number);
+        const [dia, mes, ano] = data.split('/').map(Number); // .split para separar de acorodo com o caracter '/'. Depois transformar em number e passar os valores para variavel
 
-        data = new Date(ano, mes , dia);
+        data = new Date(ano, mes , dia); // Cria a data conforme os dados informados
 
-        const dataAtual = new Date();
-        let idade = dataAtual.getFullYear() - data.getFullYear()
-        const mesAtual = dataAtual.getMonth()
-        const diaAtual = dataAtual.getDate()
+        const dataAtual = new Date(); // Cria uma data com o dia atual
+        let idade = dataAtual.getFullYear() - data.getFullYear(); // Calculo da idade
+        const mesAtual = dataAtual.getMonth(); // Armazena o mes atual
+        const diaAtual = dataAtual.getDate(); // Armazena o dia atual
 
-        if(mesAtual < mes || (mesAtual === mes  && diaAtual < dia)){
-            idade --;
+        if(mesAtual < mes || (mesAtual === mes  && diaAtual < dia)){ // Verifica se a pessoa ainda nao fez o aniversario esse ano
+            idade --; // caso nao tenha feito, decrementa a idade
         }
 
         if(idade < 18){
@@ -110,7 +110,7 @@ function lerRenda(){
             continue;
         }
 
-        var rendaNumber = Number(renda.replace(',', '.'));
+        var rendaNumber = Number(renda.replace(',', '.')); // substitue a ',' por '.' para fazer a proxima verifiçao
 
         if(rendaNumber < 0){
             console.log("ERRO: A renda deve ser maior que 0");
@@ -120,7 +120,7 @@ function lerRenda(){
         break;
     }
 
-    return rendaNumber
+    return rendaNumber;
 }
 
 function lerEstadoCivil(){
@@ -134,7 +134,7 @@ function lerEstadoCivil(){
         console.log("ERRO: O estado civil inserido não existe");
     }
 
-    return estadoCivil.toUpperCase();
+    return estadoCivil.toUpperCase(); // transforma o caracter digitado para maiusculo
 }
 
 function lerDependentes(){
@@ -160,13 +160,16 @@ function lerDependentes(){
 
 console.log("Cadastro de CLiente")
 
-const nome = lerNome()
-const CPF = lerCPF()
-const DataNasc = lerDataNasc()
-const rendaMensal = lerRenda()
-const estadoCivil = lerEstadoCivil()
-const dependentes = lerDependentes()
+// Leitura dos dados
+const nome = lerNome();
+const CPF = lerCPF();
+const DataNasc = lerDataNasc();
+const rendaMensal = lerRenda();
+const estadoCivil = lerEstadoCivil();
+const dependentes = lerDependentes();
 
+
+// Insere no objeto Cliente
 const cliente = {
     nome: nome,
     CPF: CPF,
@@ -176,6 +179,7 @@ const cliente = {
     dependentes: dependentes
 }
 
+// Estrutura da tabela
 const nomeTabela = cliente.nome.padEnd(24);
 const CPFTabela = cliente.CPF.toString().replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4").padEnd(19);
 const dataNascTabela = cliente.DataNasc.getDate().toString().padStart(2, '0')+'/'+cliente.DataNasc.getMonth().toString().padStart(2, '0')+'/'+cliente.DataNasc.getFullYear().toString().padEnd(10);
@@ -183,13 +187,21 @@ const rendaTabela = cliente.rendaMensal.toFixed(2).replace('.',',').padEnd(12);
 const estadoCivilTabela = cliente.estadoCivil.padEnd(15);
 const numeroDependentes = cliente.dependentes.toString().padEnd(22);
 
-console.log("\nMostrando dados dos Clientes")
+//toString para transformar o valor da variavel em uma string, facilita a manipulacao;
+//padEnd é usado para completar a string com espaços vazios ou com determinado caracter (usei para alinhar as colulas);
+//replace para substituir o valor do CPF sem os caracteres em um CPF com os caracteres usando a expressao '/(\d{3})(\d{3})(\d{3})(\d{2})/' para 
+//separar os digitos e a expressao '$1.$2.$3-$4' para informar onde os caracteres devem ser posicionados;
+//getDate, getMonth, getFullYear foram usadas para montar a Data;
+//toFixed é usado para transformar o Number em uma string e arrendonda-lo caso necessário;
+
+console.log("\n\t\tMostrando dados dos Clientes")
 console.log('________________________________________________________________________________________________________________________________');
 console.log('|           Nome           |         CPF         |  Data Nascimento |  Renda Mensal  |  Estado Civil   | Numero de Dependentes |');
 console.log('|--------------------------|---------------------|------------------|----------------|-----------------|-----------------------|');
-console.log(`| ${nomeTabela} | ${CPFTabela} | ${dataNascTabela} | R$${rendaTabela} | ${estadoCivilTabela} | ${numeroDependentes}|`)
+console.log(`| ${nomeTabela} | ${CPFTabela} | ${dataNascTabela} | R$${rendaTabela} | ${estadoCivilTabela} | ${numeroDependentes}|`);
 console.log('|--------------------------|---------------------|------------------|----------------|-----------------|-----------------------|');
 
+// Como ficaria sem a separacao das estruturas da tabela
 /*console.log("Mostrando dados dos Clientes")
 console.log('________________________________________________________________________________________________________________________________');
 console.log('|           Nome           |         CPF         |  Data Nascimento |  Renda Mensal  |  Estado Civil   | Numero de Dependentes |');

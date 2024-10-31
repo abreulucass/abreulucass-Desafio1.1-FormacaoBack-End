@@ -16,15 +16,15 @@ Em seguida, leia valores do usuário para criar 3 triângulos e chamar os métod
 na classe. */
 
 import promptSync from 'prompt-sync';
-import { Triangulo } from './Triangulo.js'
-import { Vertice } from '../Questao1/Vertice.js'
+import { Triangulo } from './Triangulo.js';
+import { Vertice } from '../Questao1/Vertice.js';
 
-const prompt = promptSync()
+const prompt = promptSync();
 
 // Pegar os dados do usuário
 function lerDados(vertice){
   while(1){
-      var x = parseFloat(prompt(`Digite a coordenada de X do vértice ${vertice}:`))
+      var x = parseFloat(prompt(`Digite a coordenada de X do vértice ${vertice}:`));
       if(isNaN(x)){
           console.log("Por favor, digite um número.");
           continue;
@@ -34,7 +34,7 @@ function lerDados(vertice){
   }
 
   while(1){
-      var y = parseFloat(prompt(`Digite a coordenada de Y do vértice ${vertice}:`))
+      var y = parseFloat(prompt(`Digite a coordenada de Y do vértice ${vertice}:`));
       if(isNaN(y)){
           console.log("Por favor, digite um número.");
           continue;
@@ -54,8 +54,7 @@ function verifColinearidade(ver1, ver2, ver3){ // Verifica se as coordenadas sã
   const x3 = ver3.getX();
   const y3 = ver3.getY();
 
-  const area = 0.5 * Math.abs( x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) // Calculo de area para identificar se há ou nao
-  );
+  const area = 0.5 * Math.abs( x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)); // Calculo de area para identificar se há ou nao colinearidade
 
   // Se a area for 0, os pontos sao colineares
   return area === 0;
@@ -108,6 +107,7 @@ else
   console.log("Os triangulos não são iguais\n");
 
 console.log("Verificando se o triangulo 1 é igual ao triangulo 3:");
+
 if(triangulo1.equals(triangulo3))
   console.log("Os triangulos são iguais");
 else

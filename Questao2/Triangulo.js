@@ -1,4 +1,4 @@
-import { Vertice } from '../Questao1/Vertice.js'
+import { Vertice } from '../Questao1/Vertice.js';
 
 export class Triangulo{
 
@@ -82,18 +82,18 @@ export class Triangulo{
     tipo(){
         // Verificar se é equilatero
         if(this.#lado1 === this.#lado2 && this.#lado1 === this.#lado3)
-            return 'Equilátero'
+            return 'Equilátero';
         
         // Verificar se é isósceles
         if(this.#lado1 === this.#lado2 || this.#lado2 === this.#lado3 || this.#lado3 === this.#lado1)
-            return 'Isósceles'
+            return 'Isósceles';
 
         // se nenhum dos casos for atendido, o triangulo é escaleno
-        return 'Escaleno' 
+        return 'Escaleno';
     }
 
     clone(){
-        return new Triangulo(this.#ver1, this.#ver2, this.#ver3)
+        return new Triangulo(this.#ver1, this.#ver2, this.#ver3);
     }
 
     getterArea(){

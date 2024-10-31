@@ -28,23 +28,23 @@ const prompt = PromptSync();
 class Turma {
 
   constructor(numturma) {
-    this.numturma = numturma;
-    this.alunos = [];
+    this.numturma = numturma; // Numero da turma
+    this.alunos = []; // vetor de alunos
   }
 
   addAluno() {
 
-    const regexNum = /\d+/;
-    const regexSim = /^[\w\s]*$/;
+    const regexNum = /\d+/; // regex para indentificar digitos
+    const regexSim = /[^\w\s]/; // regex para identificar caracteres especiais
 
     while (1) {
       var matri = parseInt(prompt("Digite a matricula do aluno: "));
-      if (isNaN(matri)) {
+      if (isNaN(matri)) { // verifica se a matricula não é um número
         console.log("Digite um numero. Tente novamente");
         continue;
       }
 
-      if (this.alunos.some((aluno) => aluno.matricula === matri)) {
+      if (this.alunos.some((aluno) => aluno.matricula === matri)){ // verifica se no vetor ja existe essa matricula
         console.log("Essa matricula ja esta sendo usada.");
         continue;
       }
@@ -54,7 +54,7 @@ class Turma {
 
     while (1) {
       var nome = prompt("Digite o nome do aluno: ");
-      if (regexSim.test(nome) || regexNum.test(nome)) {
+      if (regexSim.test(nome) || regexNum.test(nome)){ // verifica se no nome há digitos ou caracteres especiais
         console.log(
           "Digite um nome sem numeros ou caracteres especiais. Tente novamente"
         );
@@ -63,17 +63,15 @@ class Turma {
       break;
     }
 
-    var P1 = 0;
-    var P2 = 0;
-
-    const Aluno = {
+    const Aluno = { // Cria um objeto aluno
       matricula: matri,
       nome: nome,
-      P1: P1,
-      P2: P2,
-      NF: 0,
+      // Inicia as notas com valor 0
+      P1: 0.0,
+      P2: 0.0,
+      NF: 0.0,
 
-      lancarNota: function () {
+      lancarNota: function () { // metodo para lancar a nota
         while(1){
           var nota = parseFloat(prompt("Digite a nota: "));
           if(isNaN(nota)){
@@ -90,7 +88,7 @@ class Turma {
           switch (resp) {
             case "p1" || "P1":
               resp = 1;
-              Aluno.P1 = Math.round(nota * 10) / 10;
+              Aluno.P1 = Math.round(nota * 10) / 10; // arrendonda a nota para uma casa decimal
               break;
 
             case "p2" || "P2":
@@ -113,9 +111,9 @@ class Turma {
 
     }
 
-    this.alunos.push(Aluno);
+    this.alunos.push(Aluno); // insere o aluno no vetor de alunos
 
-    this.alunos.sort((aluno1, aluno2) => aluno1.nome.localeCompare(aluno2.nome));
+    this.alunos.sort((aluno1, aluno2) => aluno1.nome.localeCompare(aluno2.nome)); // ordena os alunos em ordem alfabetica
   }
 
   lancarNota(){
@@ -128,7 +126,7 @@ class Turma {
       break;
     }
     
-    let encontrado = 0;
+    let encontrado = 0; // variavel para saber se a matricula foi encontrada no vetor
 
     this.alunos.forEach(function(aluno){
       if(aluno.matricula === matri){
@@ -137,7 +135,7 @@ class Turma {
       } 
     })
 
-    if(encontrado == 0)
+    if(encontrado == 0) 
       console.log(`Aluno com a matricula ${matri} não foi encontrado`);
     
   }
@@ -145,18 +143,17 @@ class Turma {
   removeAluno(){
     while (1) {
       var matri = parseInt(prompt("Digite a matricula do aluno que deseja remover: "));
-      if (isNaN(matri)) {
+      if (isNaN(matri)) { 
         console.log("Digite um numero. Tente novamente");
         continue;
       }
       break;
     }
 
-    const index = this.alunos.findIndex(aluno => matri === aluno.matricula)
+    const index = this.alunos.findIndex(aluno => matri === aluno.matricula) // Procura o indice da respectiva matricula, caso não encontre o indice retornado é -1
 
-    if(index != -1)
-    {
-      const removido = this.alunos.splice(index, 1)
+    if(index != -1){
+      const removido = this.alunos.splice(index, 1) // remove o aluno do vetor com base no indice encontrado
       console.log(`Aluno ${removido[0].nome} removido com sucesso.`);
     } else {
       console.log(`Aluno com a matricula ${matri} nao encontrado.`);
@@ -165,20 +162,11 @@ class Turma {
 
   imprimirAlunos(){
     this.alunos.forEach(function (aluno) {
-      
-      if(aluno.P1 == 0)
-        aluno.P1 = '-';
 
-      if(aluno.P2 == 0)
-        aluno.P2 = '-';
-
-      if(aluno.P1 != '-' && aluno.P2 != '-'){
+      // Calculo da média dos Alunos
+      if(aluno.P1 != 0 || aluno.P2 != 0){
         aluno.NF = ( aluno.P1 + aluno.P2 ) / 2;
-      } else if (aluno.P1 != '-'){
-        aluno.NF = ( aluno.P1 ) / 2;
-      } else if (aluno.P2 != '-'){
-        aluno.NF = ( aluno.P2 ) / 2;
-      }
+      } 
       
     });
     
@@ -188,10 +176,14 @@ class Turma {
     console.log('|-------------|-----------------|------|------|------|');
     
     this.alunos.forEach(function(aluno){
-      console.log(`| ${aluno.matricula.toString().padEnd(11)} | ${aluno.nome.padEnd(15)} | ${aluno.P1.toString().padEnd(4)} | ${aluno.P2.toString().padEnd(4)} | ${aluno.NF.toFixed(1).padEnd(4)} |`);
+      console.log(`| ${aluno.matricula.toString().padEnd(11)} | ${aluno.nome.padEnd(15)} | ${aluno.P1.toString().replace(/\b0\b/g, '-').padEnd(4)} | ${aluno.P2.toString().toString().replace(/\b0\b/g, '-').padEnd(4)} | ${aluno.NF.toFixed(1).padEnd(4)} |`);
     })
 
-    console.log('|_____________|_________________|_______|______|_____|');
+    //toString para transformar o valor da variavel em uma string, facilita a manipulacao
+    //padEnd é usado para completar a string com espaços vazios ou com determinado caracter (usei para alinhar as colulas)
+    //replace para substituir o '0' por '-', usei a expressao regular /\b0\b/g para identificar somente o 0 que esta sozinho
+
+    console.log('|_____________|_________________|______|______|______|');
   }
 }
 
